@@ -16,7 +16,7 @@ body {
 header {
   width: 100%;
   height: 100px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #4c036d;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -40,7 +40,7 @@ main {
 #app-name {
   font-size: 1.5rem;
   text-align: center;
-  color: rgb(69, 59, 137);
+  color: rgb(222, 104, 255);
 }
 
 #search-form {
@@ -138,7 +138,7 @@ label {
 
 .card {
   display: flex;
-  flex-grow: 1;
+  flex: 1 1 300px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -148,8 +148,8 @@ label {
   border: solid 1px #bc87fd;
   border-radius: 0.7rem;
   margin: 5px;
-  max-width: 300px;
-  height: auto;
+  /* max-width: 300px; */
+  /* height: auto; */
 }
 
 .quote {
@@ -161,7 +161,10 @@ label {
 
 .author {
   color: #340173;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  flex: 1 1 auto;
 }
 
 .author:before {

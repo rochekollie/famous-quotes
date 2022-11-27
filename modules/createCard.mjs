@@ -23,8 +23,7 @@ export function createCard(tagCount) {
   // create the specified number of tags and append each to tagsWrapper
   for (let i = 0; i < tagCount; i += 1) {
     const tag = span.cloneNode();
-    tag.
-        tag.classList.add("tags");
+    tag.classList.add("tags");
     tagsWrapper.appendChild(tag);
   }
 
