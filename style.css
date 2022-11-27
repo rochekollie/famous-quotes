@@ -38,9 +38,15 @@ main {
 }
 
 #app-name {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
   text-align: center;
   color: rgb(222, 104, 255);
+}
+
+#app-name:hover, #app-name:focus, #app-name:active {
+  color: rgb(219, 0, 179);
 }
 
 #search-form {
@@ -148,8 +154,7 @@ label {
   border: solid 1px #bc87fd;
   border-radius: 0.7rem;
   margin: 5px;
-  /* max-width: 300px; */
-  /* height: auto; */
+  height: auto;
 }
 
 .quote {
