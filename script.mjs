@@ -1,5 +1,6 @@
 import {createCard} from './modules/createCard.mjs';
 import {defaultQuery} from './modules/defaultQuery.mjs';
+import { getRandomColor, getContrastYIQ } from './modules/beautify.mjs';
 
 document.addEventListener('DOMContentLoaded', () => {
   async function queryResource(query) {
@@ -45,44 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // append the card to the container
       document.querySelector('#cards-wrapper').appendChild(card);
+      colorize(card);
     });
   }
-
-
-  // const searchQuotes = () => {
-  //   // clear the cards-wrapper
-  //   document.querySelector('#cards-wrapper').innerHTML = '';
-  //
-  //   const getQuoteButton = document.querySelector('#search-button');
-  //   getQuoteButton.addEventListener('click', () => {
-  //     const query = document.querySelector('#search-field').value;
-  //     displayQuotes(query);
-  //   });
-  // };
-
-  //searchQuotes();
+  
+  const searchQuotes = () => {
+    // clear the cards-wrapper
+    document.querySelector('#cards-wrapper').innerHTML = '';
+    getQuoteButton.addEventListener('click', () => {
+      const query = document.querySelector('#search-field').value;
+      displayQuotes(query);
+    });
+  };
 
   // Attach an event listener to the `button`
-  //getQuoteButton?.addEventListener('click', displayQuotes);
+  const getQuoteButton = document.querySelector('#search-button');
+  getQuoteButton?.addEventListener('click', searchQuotes);
 
-  // function colorize(components) {
-  //   components.forEach(function (section) {
-  //     section.style.backgroundColor = getRandomColor();
-  //     section.style.color = getContrastYIQ(getRandomColor());
-  //   });
-  // }
-
-  // const createCardComponents = (count) => {
-  //   const components = [];
-  //   for (let i = 0; i < count; i += 1) {
-  //     components.push(createCard());
-  //   }
-  //   return components;
-  // };
-
-  // function displayQuotes(promise) {
-  //   //
-  // }
+  function colorize() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(function (section) {
+      section.style.backgroundColor = getRandomColor();
+      section.style.color = getContrastYIQ(getRandomColor());
+    });
+  }
 
   // const getQuoteTag = () => {
   //   const tags = document.querySelectorAll('.tags');
