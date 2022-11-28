@@ -79,8 +79,8 @@ label {
   border: solid 2px rgba(0, 0, 0, 0.1);
   border-radius: 30px 1px 1px 30px;
   padding: 0 1rem;
-  background-color: rgba(0, 0, 0, 0.1);
-  color: #353434;
+  background-color: #7b00ff;
+  color: #edefed99;
   width: 50px;
 }
 
@@ -158,6 +158,7 @@ label {
 }
 
 .quote {
+  font-weight: 100;
   font-style: italic;
   margin: 0;
   padding: 0;

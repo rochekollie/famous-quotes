@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function queryResource(query) {
     const url = `https://api.quotable.io/search/quotes?query=${query}&fields=content`;
     const response = await fetch(url);
-    const { results } = await response.json();
+    const {results} = await response.json();
     return results;
   }
 
@@ -20,40 +20,47 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   async function displayQuotes(query) {
-    // auto fill the input field with the query
+    // fill the input field with the query
     const searchField = document.getElementById('search-field');
     autoFillField(searchField, query);
 
     // get the quotes
     const quotes = await queryResource(query);
     quotes.forEach((quote) => {
-      const numberOfQuotes = quote.content;
-      const cards = createCard(numberOfQuotes);
+      // create card based on it number of tags
+      const card = createCard(quote.tags.length);
 
       // display each quote, author, and tags in the card
-      const quoteElement = cards.querySelector('.quote');
+      const quoteElement = card.querySelector('.quote');
       quoteElement.textContent = quote.content;
-      const authorElement = cards.querySelector('.author');
+      const authorElement = card.querySelector('.author');
       authorElement.textContent = quote.author;
-      const tagsElement = cards.querySelector('.tags');
-      //tagsElement.textContent = quote.tags;
+      const tagsWrapper = card.querySelector('.tags-wrapper');
 
-      document.querySelector('#cards-wrapper').appendChild(cards);
+      // get the tags in the card
+      const tags = tagsWrapper.querySelectorAll('.tags');
+      tags.forEach((tag, index) => {
+        tag.textContent = quote.tags[index];
+      });
+
+      // append the card to the container
+      document.querySelector('#cards-wrapper').appendChild(card);
     });
   }
 
-  const searchQuotes = () => {
-    // clear the cards-wrapper
-    document.querySelector('#cards-wrapper').innerHTML = '';
 
-    const getQuoteButton = document.querySelector('#search-button');
-    getQuoteButton.addEventListener('click', () => {
-      const query = document.querySelector('#search-field').value;
-      displayQuotes(query);
-    });
-  };
+  // const searchQuotes = () => {
+  //   // clear the cards-wrapper
+  //   document.querySelector('#cards-wrapper').innerHTML = '';
+  //
+  //   const getQuoteButton = document.querySelector('#search-button');
+  //   getQuoteButton.addEventListener('click', () => {
+  //     const query = document.querySelector('#search-field').value;
+  //     displayQuotes(query);
+  //   });
+  // };
 
-  searchQuotes();
+  //searchQuotes();
 
   // Attach an event listener to the `button`
   //getQuoteButton?.addEventListener('click', displayQuotes);

@@ -8,8 +8,3 @@ export async function queryResource(query) {
 export async function getQuotes(query) {
   return await queryResource(query);
 }
-
-
-export const quotes = await queryResource('technology');
-
-console.log(quotes);
