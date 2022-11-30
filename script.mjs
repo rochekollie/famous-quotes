@@ -1,12 +1,12 @@
-import {createCard} from './modules/createCard.mjs';
-import {defaultQuery} from './modules/defaultQuery.mjs';
+import { createCard } from './modules/createCard.mjs';
+import { defaultQuery } from './modules/defaultQuery.mjs';
 import { getRandomColor, getContrastYIQ } from './modules/beautify.mjs';
 
 document.addEventListener('DOMContentLoaded', () => {
   async function queryResource(query) {
     const url = `https://api.quotable.io/search/quotes?query=${query}&fields=content`;
     const response = await fetch(url);
-    const {results} = await response.json();
+    const { results } = await response.json();
     return results;
   }
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // get the tags in the card
       const tags = tagsWrapper.querySelectorAll('.tags');
       tags.forEach((tag, index) => {
-        tag.textContent = quote.tags[index];
+        tag.textContent = '#' + quote.tags[index];
       });
 
       // append the card to the container
@@ -49,19 +49,30 @@ document.addEventListener('DOMContentLoaded', () => {
       colorize(card);
     });
   }
-  
+
   const searchQuotes = () => {
-    // clear the cards-wrapper
-    document.querySelector('#cards-wrapper').innerHTML = '';
-    getQuoteButton.addEventListener('click', () => {
-      const query = document.querySelector('#search-field').value;
+    let query = document.querySelector('#search-field').value;
+    if (query) {
+      document.querySelector('#cards-wrapper').innerHTML = '';
+      autoFillField(document.querySelector('#search-field'), query);
       displayQuotes(query);
-    });
+    } else {
+      alert('Please enter a query');
+    }
   };
 
   // Attach an event listener to the `button`
   const getQuoteButton = document.querySelector('#search-button');
   getQuoteButton?.addEventListener('click', searchQuotes);
+
+  // Attach an event listener when the ENTER key is pressed
+  const searchField = document.querySelector('#search-field');
+  searchField?.addEventListener('keyup', (event) => {
+    event.preventDefault();
+    if (event.key === 'Enter') {
+      searchQuotes();
+    }
+  });
 
   function colorize() {
     const cards = document.querySelectorAll('.card');
@@ -71,27 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // const getQuoteTag = () => {
-  //   const tags = document.querySelectorAll('.tags');
-  //   let quoteTag = '';
-  //   tags.forEach((tag) => {
-  //     tag.addEventListener('click', (event) => {
-  //       quoteTag = event.target.innerHTML;
+  //TODO: allows the user to search a quote based an ide
+  // const searchQuotesByTagName = () => {
+  //     const tags = document.querySelectorAll('.tags');
+  //     tags.forEach((tag) => {
+  //         tag.addEventListener('click', () => {
+  //             const query = tag.textContent;
+  //             displayQuotes(query);
+  //         });
   //     });
-  //   });
-  //   console.log(quoteTag);
   // };
 
-  // function searchQuotesByTagName(tagValue) {
-  //   //
-  // }
+  // Attach an event listener to the `tags`
+  // const tags = document.querySelectorAll('.tags');
+  // tags?.addEventListener('click', searchQuotesByTagName);
 
   // load the page with quotes
-  //displayQuotes();
-  //colorize(document.querySelectorAll('section')); // experiment and delete it
-
-  // call the searchQuotesByTagName function
-  //searchQuotesByTagName(getQuoteTag());
-  //getQuoteTag();
   displayQuotes(getRandomArrayItem(defaultQuery));
+  //searchQuotesByTagName()
 });
