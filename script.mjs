@@ -1,20 +1,42 @@
-import { createCard } from './modules/createCard.mjs';
-import { defaultQuery } from './modules/defaultQuery.mjs';
-import { getRandomColor, getContrastYIQ } from './modules/beautify.mjs';
+// @ts-nocheck
+import {createCard} from './modules/createCard.mjs';
+import {defaultQuery} from './modules/defaultQuery.mjs';
+import {getContrastYIQ, getRandomColor} from './modules/beautify.mjs';
 
 document.addEventListener('DOMContentLoaded', () => {
   async function queryResource(query) {
     const url = `https://api.quotable.io/search/quotes?query=${query}&fields=content`;
     const response = await fetch(url);
-    const { results } = await response.json();
+    const {results} = await response.json();
     return results;
   }
 
+  /**
+   * Returns a random element from an array
+   * @param {Array} array - The array to pick a random element from
+   * @returns {*} - A random element from the array
+   * @example getRandomElement([1, 2, 3]) // 2
+   */
   const getRandomArrayItem = (array) => {
     return array[Math.floor(Math.random() * array.length)];
   };
 
-  const autoFillField = (input, value) => {
+  /**
+   * Returns the value of a specified HTMLElement
+   * @param {HTMLElement} element - The element to get the value from
+   * @returns {string} The value of the element
+   */
+  const getHTMLElementValue = (element) => {
+    // check if the element is an input
+    if (element.tagName === 'INPUT') {
+      const {value} = element;
+      return value;
+    } else {
+      return element.textContent;
+    }
+  };
+
+  const fillInput = (input, value) => {
     if (input && value) {
       input.value = value;
     }
@@ -23,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function displayQuotes(query) {
     // fill the input field with the query
     const searchField = document.getElementById('search-field');
-    autoFillField(searchField, query);
+    fillInput(searchField, query);
 
     // get the quotes
     const quotes = await queryResource(query);
@@ -54,25 +76,39 @@ document.addEventListener('DOMContentLoaded', () => {
     let query = document.querySelector('#search-field').value;
     if (query) {
       document.querySelector('#cards-wrapper').innerHTML = '';
-      autoFillField(document.querySelector('#search-field'), query);
+      fillInput(document.querySelector('#search-field'), query);
       displayQuotes(query);
+      updateTitle();
     } else {
       alert('Please enter a query');
     }
   };
 
-  // Attach an event listener to the `button`
+  // get search field and search button
+  const searchField = document.querySelector('#search-field');
   const getQuoteButton = document.querySelector('#search-button');
+
+  // Attach an event listener to the `button`
   getQuoteButton?.addEventListener('click', searchQuotes);
 
-  // Attach an event listener when the ENTER key is pressed
-  const searchField = document.querySelector('#search-field');
-  searchField?.addEventListener('keyup', (event) => {
+  // Attach an event listener to when the user presses the `Enter` key
+  document.addEventListener('keyup', (event) => {
     event.preventDefault();
     if (event.key === 'Enter') {
-      searchQuotes();
+      searchQuotes;
     }
   });
+
+  const updateTitle = () => {
+    // clear the title
+    document.title = '';
+    // set the user query in the page title
+    const title = document.querySelector('title');
+    // change the first letter to uppercase
+    const query = getHTMLElementValue(searchField);
+    const queryCapitalized = query.charAt(0).toUpperCase() + query.slice(1);
+    title.textContent = `Famous Quotes - ${queryCapitalized}`;
+  };
 
   function colorize() {
     const cards = document.querySelectorAll('.card');
@@ -100,4 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // load the page with quotes
   displayQuotes(getRandomArrayItem(defaultQuery));
   //searchQuotesByTagName()
+  updateTitle();
+
+
 });
