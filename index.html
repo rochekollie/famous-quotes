@@ -2,46 +2,63 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Famous Quotes</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@400;500;600;700&display=swap"
-            rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Famous Quotes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
 <header>
-    <a id="app-name" href="./">Famous Quotes</span></a>
-    <form id="search-form" action="./" method="get">
-        <label class="btn-group" for="search-field">Tag</label>
-        <input class="btn-group" id="search-field" type="search">
-        <button class="btn-group" id="search-button" type="button">Get
-            Quotes
-        </button>
-    </form>
+  <nav>
+    <a id="app-name" href="./">Famous Quotes</a>
+    <!-- search-field form -->
+    <div id="search-container">
+      <form id="search-form" action="./" method="GET">
+        <label for="search-field" class="hidden">Search</label>
+        <input type="text" id="search-field" name="search"
+               placeholder="Search" autocomplete=" " title="Search"
+               aria-label="Search">
+<!--        <button id="search-button" type="submit" title="Search">-->
+<!--          <svg id="search-icon"-->
+<!--               xmlns="http://www.w3.org/2000/svg" height="24px"-->
+<!--               viewBox="0 0 24 24" width="24px" fill="#000000">-->
+<!--            <path d="M0 0h24v24H0V0z" fill="none"/>-->
+<!--            <path-->
+<!--                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>-->
+<!--          </svg>-->
+<!--        </button>-->
+      </form>
+    </div>
+  </nav>
+  <!-- end form -->
 </header>
 <main>
-    <div id="cards-wrapper">
-        <!--  sample card -->
-        <!-- <div class="card">
-            <p class="quote">
-                Love is rarer than genius itself. And friendship is rarer than love.
-            </p>
-            <p class="author">Charles Péguy</p>
-            <div class="tags-wrapper">
-                <span class="tags">friendship</span>
-                <span class="tags">genius</span>
-            </div>
-        </div> -->
+  <div id="cards-wrapper">
+    <div id="no-query">
+      <p>If your query does not return any quote, please check
+        your spelling or
+        try searching another term in
+        the search field above.</p>
+      <p>Alternatively, you can return to the homepage or click <a
+          href="./">here</a> and get some random quotes.</p>
     </div>
+  </div>
 </main>
 <footer>
-    <p>Developed in <a href="https://baltimore.org/">Baltimore</a> with ❤️ by <a href="https://rochekollie.com" target="_blank">Roche Kollie</a></p>
+  <p>Developed in
+    <a href="https://baltimore.org/">Baltimore</a>
+    with ❤️ by
+    <a href="https://rochekollie.com" target="_blank"
+       rel="noopener">Roche
+      Kollie</a>
+  </p>
 </footer>
 <script src="script.mjs" type="module"></script>
 </body>
